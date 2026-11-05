@@ -2,7 +2,7 @@
 
 Each step needs the owner's go-ahead.
 
-**Done (2026-11-06):** domain `kiddyzone.in` bought (GoDaddy) and set in `store.json`; site uploaded by hand to `/var/www/kiddyzone` on the Oracle VM (`ssh oracle-billing`, 68.233.109.57); nginx config from `deploy/nginx-kiddyzone.in.conf` installed as `/etc/nginx/sites-available/kiddyzone.in`. GoDaddy DNS: A `@` → 68.233.109.57, CNAME `www` → `kiddyzone.in.`. HTTPS by certbot (auto-renews, dry run passed); www and http redirect to https://kiddyzone.in. **Live since 2026-11-06.** Until the GitHub repo exists, redeploy with `npm run build && rsync -az --delete dist/ oracle-billing:/var/www/kiddyzone/`.
+**Done (2026-11-06):** domain `kiddyzone.in` bought (GoDaddy) and set in `store.json`; site uploaded by hand to `/var/www/kiddyzone` on the Oracle VM (`ssh oracle-billing`, 68.233.109.57); nginx config from `deploy/nginx-kiddyzone.in.conf` installed as `/etc/nginx/sites-available/kiddyzone.in`. GoDaddy DNS: A `@` → 68.233.109.57, CNAME `www` → `kiddyzone.in.`. HTTPS by certbot (auto-renews, dry run passed); www and http redirect to https://kiddyzone.in. **Live since 2026-11-06.** Repo: https://github.com/shafeequealipt-dotcom/kiddyzone-site (public). Every push to `main` builds and deploys via GitHub Actions as the server user `kzdeploy` (no sudo, owns only `/var/www/kiddyzone`, key in the `SSH_PRIVATE_KEY` repo secret). Steps 2–4 below are done.
 
 1. **Domain.** Buy it, then set `url` in `src/data/store.json`. Everything else follows from that one value.
 2. **Site repo.** Create a GitHub repo from this folder.
