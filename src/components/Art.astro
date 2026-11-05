@@ -1,0 +1,24 @@
+---
+// Cut-paper illustrations used until real product photos arrive.
+interface Props {
+  name: string;
+  class?: string;
+}
+const { name, class: className } = Astro.props;
+const ink = '#2a1a3e';
+const art: Record<string, string> = {
+  frock: `<path d="M48 14h24l4 22-5 8 27 58c-24 8-52 8-76 0l27-58-5-8z" fill="#ff6fa8"/><path d="M45 44h30l4 8H41z" fill="#ffc22e"/><path d="M22 102c24 8 52 8 76 0l-3-7c-22 7-48 7-70 0z" fill="#fff"/><circle cx="60" cy="70" r="4" fill="#fff"/><circle cx="46" cy="84" r="4" fill="#fff"/><circle cx="74" cy="84" r="4" fill="#fff"/>`,
+  party: `<path d="M50 12h20l5 26-4 6 31 60c-26 9-58 9-84 0l31-60-4-6z" fill="#6b3fd4"/><path d="M46 44h28l3 7H43z" fill="#ffc22e"/><path d="M60 60l3 8 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1z" fill="#ffc22e"/><circle cx="38" cy="92" r="3" fill="#ff6fa8"/><circle cx="82" cy="92" r="3" fill="#ff6fa8"/><circle cx="60" cy="96" r="3" fill="#fff"/>`,
+  dungaree: `<rect x="28" y="20" width="64" height="30" rx="6" fill="#ffc22e"/><path d="M28 24h64v8H28z" fill="#f0483e"/><path d="M28 36h64v8H28z" fill="#f0483e"/><path d="M40 40h40l6 66H66l-6-34-6 34H34z" fill="#0fa3a3"/><path d="M42 18h7v26h-7zM71 18h7v26h-7z" fill="#0b7c7c"/><rect x="50" y="48" width="20" height="14" rx="3" fill="#0b7c7c"/>`,
+  onesie: `<path d="M40 18c6 8 34 8 40 0l24 18-10 16-10-6v30l-10 26H66l-6-10-6 10H46L36 76V46l-10 6-10-16z" fill="#ffc22e"/><path d="M42 18c6 8 30 8 36 0l-4-3c-7 6-21 6-28 0z" fill="#fff"/><circle cx="60" cy="56" r="11" fill="#fff"/><path d="M55 54h.1M65 54h.1" stroke="${ink}" stroke-width="4" stroke-linecap="round"/><path d="M55 60c3 3 7 3 10 0" stroke="${ink}" stroke-width="2.5" fill="none" stroke-linecap="round"/>`,
+  bow: `<path d="M56 54 14 28c-6 12-6 40 0 54z" fill="#f0483e"/><path d="m64 54 42-26c6 12 6 40 0 54z" fill="#f0483e"/><rect x="50" y="42" width="20" height="26" rx="8" fill="#ffc22e"/><path d="M26 42c-2 8-2 18 0 26M94 42c2 8 2 18 0 26" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M52 66 40 104l14-8 6 12zM68 66l12 38-14-8-6 12z" fill="#c92f2a" opacity=".9"/>`,
+  blocks: `<rect x="14" y="62" width="42" height="42" rx="5" fill="#0fa3a3"/><rect x="64" y="62" width="42" height="42" rx="5" fill="#f0483e"/><rect x="38" y="18" width="42" height="42" rx="5" fill="#ffc22e"/><path d="M59 26 72 52H46z" fill="#fff"/><circle cx="35" cy="83" r="11" fill="#fff"/><rect x="74" y="72" width="22" height="22" rx="3" fill="#fff"/>`,
+  teddy: `<circle cx="34" cy="28" r="14" fill="#c47a3d"/><circle cx="86" cy="28" r="14" fill="#c47a3d"/><circle cx="34" cy="28" r="7" fill="#ffc98f"/><circle cx="86" cy="28" r="7" fill="#ffc98f"/><ellipse cx="60" cy="86" rx="28" ry="26" fill="#c47a3d"/><circle cx="60" cy="44" r="28" fill="#d98b48"/><ellipse cx="60" cy="86" rx="15" ry="15" fill="#ffc98f"/><ellipse cx="60" cy="54" rx="13" ry="10" fill="#ffc98f"/><circle cx="49" cy="38" r="3.5" fill="${ink}"/><circle cx="71" cy="38" r="3.5" fill="${ink}"/><ellipse cx="60" cy="49" rx="4.5" ry="3.5" fill="${ink}"/><path d="M38 66 60 72l22-6-4 9-18 3-18-3z" fill="#f0483e"/>`,
+  rocket: `<path d="M60 8c18 16 22 44 14 72H46C38 52 42 24 60 8z" fill="#fff"/><path d="M60 8c8 7 13 16 15 26H45c2-10 7-19 15-26z" fill="#f0483e"/><circle cx="60" cy="50" r="10" fill="#0fa3a3"/><circle cx="60" cy="50" r="6" fill="#bff1ef"/><path d="M45 62 26 88l20-4zM75 62l19 26-20-4z" fill="#6b3fd4"/><path d="M50 84h20l-10 26z" fill="#ffc22e"/>`,
+  gift: `<rect x="18" y="50" width="84" height="56" rx="5" fill="#f0483e"/><rect x="12" y="36" width="96" height="20" rx="4" fill="#ff6fa8"/><rect x="51" y="36" width="18" height="70" fill="#ffc22e"/><path d="M60 36C44 36 30 28 36 18c5-8 18-2 24 18zM60 36c16 0 30-8 24-18-5-8-18-2-24 18z" fill="#ffc22e"/>`,
+  car: `<path d="M16 72c0-8 6-12 14-13l14-20c2-3 5-4 8-4h22c4 0 7 2 9 5l11 19c8 1 14 5 14 13v12c0 2-2 4-4 4H20c-2 0-4-2-4-4z" fill="#f0483e"/><path d="M51 42h9v17H40zM66 42h8c1 0 2 1 3 2l9 15H66z" fill="#bff1ef"/><circle cx="38" cy="88" r="12" fill="${ink}"/><circle cx="38" cy="88" r="5" fill="#fff"/><circle cx="84" cy="88" r="12" fill="${ink}"/><circle cx="84" cy="88" r="5" fill="#fff"/>`,
+  ball: `<circle cx="60" cy="60" r="44" fill="#ffc22e"/><path d="M60 16a44 44 0 0 1 0 88c-16-26-16-62 0-88z" fill="#f0483e"/><path d="M18 48c26 8 58 8 84 0l2 12c-28 9-60 9-88 0z" fill="#fff"/>`,
+  shoe: `<path d="M16 40c8 4 18 4 26-2l30 30c10 4 32 4 34 20v10H16z" fill="#6b3fd4"/><path d="M16 88h90v12a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4z" fill="#fff"/><path d="m46 50 8-8M56 60l8-8M66 68l8-8" stroke="#ffc22e" stroke-width="5" stroke-linecap="round"/>`,
+};
+---
+<svg class={className} viewBox="0 0 120 120" aria-hidden="true" focusable="false" set:html={art[name] ?? ''} />

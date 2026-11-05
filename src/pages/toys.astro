@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Art from '../components/Art.astro';
+import Categories from '../components/Categories.astro';
+import catalog from '../data/catalog.json';
+import { whatsappHref } from '../lib/store';
+---
+<Base
+  title="Toy Shop in Wandoor | Educational Toys & Gifts | Kiddy Zone"
+  description="Educational toys, soft toys, imported toys and gifts at Kiddy Zone on C H Bypass Road, Wandoor, Malappuram. Tell us the age and we'll suggest what to look at."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Toys', path: '/toys' }]}
+>
+  <section class="wrap" style="padding-block:1.5rem 3rem">
+    <h1>The toy shelf</h1>
+    <p class="lede">Toys and gifts in Wandoor, for the child who has everything and the one who just wants the red one.</p>
+    <div class="shelf toy-shelf" style="margin-top:2rem">
+      <div class="shelf-grid">
+        {catalog.toys.map((c) => (
+          <a class={`cubby bg-${c.colour}`} href={`#${c.id}`}>
+            <Art name={c.art} />
+            <span>{c.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="wrap" style="padding-bottom:3rem">
+    <Categories categories={catalog.toys} />
+    <div class="callout">
+      <h2>Stuck on a birthday gift?</h2>
+      <p>Send us the age, what the child enjoys and your budget. We'll suggest a few things to look at.</p>
+      <a class="btn btn-wa" href={whatsappHref("Hi Kiddy Zone, I need a gift idea. The child's age is ")}>Ask for a gift idea</a>
+    </div>
+  </section>
+</Base>

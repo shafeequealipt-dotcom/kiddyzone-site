@@ -1,0 +1,36 @@
+{
+  "url": "https://kiddyzone.in",
+  "name": "Kiddy Zone",
+  "legalName": "Kiddy Zone – The Complete Kids Shoppe",
+  "tagline": "The Complete Kids Shoppe",
+  "taglineMl": "കുട്ടികൾക്ക് വേണ്ടതെല്ലാം ഒരിടത്ത്",
+  "description": "Kids' wear, accessories, toys and gifts at Kiddy Zone on C H Bypass Road, Wandoor, Malappuram, Kerala.",
+  "phone": "+91 99477 30300",
+  "phoneE164": "+919947730300",
+  "whatsapp": "919947730300",
+  "email": "kiddyzonekidsshopping@gmail.com",
+  "address": {
+    "street": "C H Bypass Road",
+    "city": "Wandoor",
+    "district": "Malappuram",
+    "region": "Kerala",
+    "postalCode": "679328",
+    "country": "IN"
+  },
+  "mapQuery": "Kiddy zone the complete kids shoppe, C H Bypass Rd, Wandoor, Kerala 679328",
+  "instagram": "https://www.instagram.com/kiddyzone.in/",
+  "instagramHandle": "@kiddyzone.in",
+  "hours": null,
+  "areas": ["Wandoor", "Nilambur", "Edavanna", "Manjeri", "Malappuram"],
+  "reviews": {
+    "source": "Google",
+    "rating": "5.0",
+    "count": 9,
+    "asOf": "November 2026",
+    "quotes": [
+      "A good kids shop with car parking facilities.",
+      "Good collection available",
+      "Located in the bypass road.."
+    ]
+  }
+}

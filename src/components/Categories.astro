@@ -1,0 +1,34 @@
+---
+import Art from './Art.astro';
+import { whatsappHref } from '../lib/store';
+
+interface Item { name: string; image: string; alt: string; price?: string }
+interface Props {
+  categories: { id: string; name: string; art: string; colour: string; blurb: string; items: Item[] }[];
+}
+const { categories } = Astro.props;
+---
+<div class="cats">
+  {categories.map((c) => (
+    <article id={c.id} class={`cat bg-${c.colour}`}>
+      <Art name={c.art} />
+      <div>
+        <h2>{c.name}</h2>
+        <p>{c.blurb}</p>
+        {c.items.length > 0 && (
+          <ul class="products">
+            {c.items.map((p) => (
+              <li>
+                <img src={p.image} alt={p.alt} loading="lazy" width="400" height="400" />
+                <strong>{p.name}</strong>
+                <br />
+                {p.price ?? <a class="cat-link" href={whatsappHref(`Hi Kiddy Zone, what is the price of ${p.name}?`)}>Ask on WhatsApp</a>}
+              </li>
+            ))}
+          </ul>
+        )}
+        <a class="cat-link" href={whatsappHref(`Hi Kiddy Zone, what do you have in ${c.name} right now? My child's age is `)}>Check availability on WhatsApp</a>
+      </div>
+    </article>
+  ))}
+</div>

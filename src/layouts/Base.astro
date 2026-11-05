@@ -1,0 +1,109 @@
+---
+import '@fontsource/baloo-chettan-2/latin-800.css';
+import '@fontsource/baloo-chettan-2/malayalam-700.css';
+import '@fontsource-variable/figtree';
+import '../styles/global.css';
+import { store, addressLine, telHref, directionsHref, whatsappHref, storeSchema, breadcrumbSchema } from '../lib/store';
+
+interface Props {
+  title: string;
+  description: string;
+  ogType?: string;
+  breadcrumbs?: { name: string; path: string }[];
+  schema?: object[];
+}
+const { title, description, ogType = 'website', breadcrumbs, schema = [] } = Astro.props;
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', store.url).href;
+const ogImage = `${store.url}/og.png`;
+const ld = [storeSchema(), ...(breadcrumbs ? [breadcrumbSchema(breadcrumbs)] : []), ...schema];
+const nav = [
+  { href: '/kids-wear', label: "Kids' wear" },
+  { href: '/toys', label: 'Toys' },
+  { href: '/blog', label: 'Notes' },
+  { href: '/visit', label: 'Visit' },
+];
+const path = Astro.url.pathname.replace(/\/$/, '');
+const letters = 'Kiddy'.split('');
+const letters2 = 'Zone'.split('');
+---
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#fff6e4" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={store.name} />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="geo.region" content="IN-KL" />
+    <meta name="geo.placename" content="Wandoor, Malappuram" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM summary" />
+    {ld.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item).replace(/</g, '\\u003c')} />)}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="awning" aria-hidden="true"></div>
+    <header class="site-head wrap">
+      <a class="wordmark" href="/" aria-label="Kiddy Zone, The Complete Kids Shoppe: home">
+        <span class="wordmark-name">
+          {letters.map((l, i) => <span class={`c${i}`}>{l}</span>)}
+          <span class="wordmark-gap"></span>
+          {letters2.map((l, i) => <span class={`c${i + 5}`}>{l}</span>)}
+        </span>
+        <span class="wordmark-tag">{store.tagline}</span>
+      </a>
+      <nav aria-label="Main">
+        {nav.map((n) => <a href={n.href} aria-current={path === n.href || path.startsWith(`${n.href}/`) ? 'page' : undefined}>{n.label}</a>)}
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-foot">
+      <div class="wrap foot-grid">
+        <div>
+          <p class="foot-brand">{store.name}</p>
+          <p class="foot-ml" lang="ml">{store.taglineMl}</p>
+          <p>{addressLine}</p>
+        </div>
+        <div>
+          <h2>Talk to the shop</h2>
+          <ul>
+            <li><a href={telHref}>{store.phone}</a></li>
+            <li><a href={whatsappHref()}>WhatsApp</a></li>
+            <li><a href={`mailto:${store.email}`}>Email</a></li>
+            <li><a href={store.instagram}>Instagram {store.instagramHandle}</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Around the site</h2>
+          <ul>
+            <li><a href="/kids-wear">Kids' wear</a></li>
+            <li><a href="/toys">Toys &amp; gifts</a></li>
+            <li><a href="/about">About the shop</a></li>
+            <li><a href="/blog">Notes for parents</a></li>
+            <li><a href="/visit">Find us in Wandoor</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="wrap foot-small">© {new Date().getFullYear()} {store.legalName}</p>
+    </footer>
+    <div class="action-bar" role="group" aria-label="Contact the shop">
+      <a href={telHref}>Call</a>
+      <a href={whatsappHref()} class="is-wa">WhatsApp</a>
+      <a href={directionsHref}>Directions</a>
+    </div>
+  </body>
+</html>

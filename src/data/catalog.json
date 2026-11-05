@@ -1,0 +1,79 @@
+{
+  "_howToUse": "Each section below is one category on the site. To show a real product, add it to that category's items list: { \"name\": \"...\", \"image\": \"/images/file.webp\", \"alt\": \"...\", \"price\": \"optional text\" }. Items appear automatically. Leave price out to show 'Ask on WhatsApp'. Drop photos in public/images/.",
+  "wear": [
+    {
+      "id": "frocks",
+      "name": "Frocks & everyday dresses",
+      "art": "frock",
+      "colour": "pink",
+      "blurb": "Easy dresses for school-free days, family visits and the trip to the bakery. Tell us the age and we'll show you what fits.",
+      "items": []
+    },
+    {
+      "id": "party-wear",
+      "name": "Party & festive wear",
+      "art": "party",
+      "colour": "violet",
+      "blurb": "Something special for Eid, Onam, Vishu, Christmas, birthdays and weddings in the family. Ask early when a function is coming up.",
+      "items": []
+    },
+    {
+      "id": "western-wear",
+      "name": "Western wear",
+      "art": "dungaree",
+      "colour": "teal",
+      "blurb": "Smart-casual looks and playful everyday sets, chosen to be stylish and comfortable for little ones.",
+      "items": []
+    },
+    {
+      "id": "baby-sets",
+      "name": "Baby sets",
+      "art": "onesie",
+      "colour": "sun",
+      "blurb": "Sets for the smallest customers, and a good place to start if you're choosing a gift for a new baby.",
+      "items": []
+    },
+    {
+      "id": "accessories",
+      "name": "Kids' accessories",
+      "art": "bow",
+      "colour": "tomato",
+      "blurb": "The small things that finish an outfit. Bring the dress along, or send us a photo, and we'll help you match it.",
+      "items": []
+    }
+  ],
+  "toys": [
+    {
+      "id": "educational-toys",
+      "name": "Educational toys",
+      "art": "blocks",
+      "colour": "teal",
+      "blurb": "Toys for building, sorting, counting and figuring things out. Tell us the child's age and what they enjoy, and we'll narrow it down.",
+      "items": []
+    },
+    {
+      "id": "soft-toys",
+      "name": "Soft toys",
+      "art": "teddy",
+      "colour": "pink",
+      "blurb": "Something to hug, name and carry everywhere, and usually the first thing small hands reach for on the shelf.",
+      "items": []
+    },
+    {
+      "id": "imported-toys",
+      "name": "Imported toys",
+      "art": "rocket",
+      "colour": "violet",
+      "blurb": "A changing shelf of imported toys. The range moves with each new arrival, so ask what's available this week.",
+      "items": []
+    },
+    {
+      "id": "gifts",
+      "name": "Gifts",
+      "art": "gift",
+      "colour": "sun",
+      "blurb": "Birthday tomorrow and no idea what to buy? Tell us the age and your budget, and we'll suggest a few things.",
+      "items": []
+    }
+  ]
+}

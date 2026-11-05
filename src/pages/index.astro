@@ -1,0 +1,104 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Art from '../components/Art.astro';
+import PostCards from '../components/PostCards.astro';
+import { store, addressLine, whatsappHref, directionsHref } from '../lib/store';
+
+const posts = (await getCollection('blog', (p) => !p.data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
+
+const cubbies = [
+  { art: 'frock', label: 'Frocks', href: '/kids-wear#frocks', bg: 'pink' },
+  { art: 'blocks', label: 'Learning toys', href: '/toys#educational-toys', bg: 'teal' },
+  { art: 'party', label: 'Party wear', href: '/kids-wear#party-wear', bg: 'violet' },
+  { art: 'teddy', label: 'Soft toys', href: '/toys#soft-toys', bg: 'sun' },
+  { art: 'dungaree', label: 'Western wear', href: '/kids-wear#western-wear', bg: 'paper' },
+  { art: 'rocket', label: 'Imported toys', href: '/toys#imported-toys', bg: 'tomato' },
+  { art: 'gift', label: 'Gifts', href: '/toys#gifts', bg: 'teal' },
+  { art: 'onesie', label: 'Baby sets', href: '/kids-wear#baby-sets', bg: 'pink' },
+  { art: 'bow', label: 'Accessories', href: '/kids-wear#accessories', bg: 'sun' },
+];
+---
+<Base
+  title="Kiddy Zone Wandoor | Kids' Wear, Toys & Gifts Shop in Malappuram"
+  description="Kids' wear, accessories, toys and gifts under one roof on C H Bypass Road, Wandoor. Call or WhatsApp Kiddy Zone to ask what's available, then come and see it."
+>
+  <section class="hero wrap">
+    <div>
+      <p class="hero-ml" lang="ml">{store.taglineMl}</p>
+      <h1>The next outfit. The next favourite toy. One shop in Wandoor.</h1>
+      <p class="lede">Kiddy Zone is the complete kids' shop on C H Bypass Road, with imported clothing, accessories, toys and gifts all under one roof.</p>
+      <div class="btns">
+        <a class="btn btn-wa" href={whatsappHref("Hi Kiddy Zone, what's new in the shop this week?")}>Check availability on WhatsApp</a>
+        <a class="btn" href={directionsHref}>Get directions</a>
+      </div>
+    </div>
+    <div class="shelf">
+      <div class="shelf-grid">
+        {cubbies.map((c) => (
+          <a class={`cubby bg-${c.bg}`} href={c.href}>
+            <Art name={c.art} />
+            <span>{c.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap doors" aria-label="Shop by department">
+    <a class="door door-wear" href="/kids-wear">
+      <h2>Kids' wear</h2>
+      <p>Everyday dresses, festive outfits, western wear, baby sets and the little extras that finish them.</p>
+      <span class="door-go">See the rail</span>
+      <Art name="frock" />
+    </a>
+    <a class="door door-toys" href="/toys">
+      <h2>Toys &amp; gifts</h2>
+      <p>Educational toys, soft toys, imported finds, and an easy answer when there's a birthday tomorrow.</p>
+      <span class="door-go">See the shelf</span>
+      <Art name="car" />
+    </a>
+  </section>
+
+  <section class="section wrap">
+    <h2>Check first, then come and see it</h2>
+    <p class="lede">Stock in a kids' shop changes quickly, so we don't list prices or sizes that may be gone tomorrow. Just ask.</p>
+    <ol class="steps">
+      <li><h3>Tell us who it's for</h3><p>Send the child's age and the occasion on WhatsApp, or simply call the shop.</p></li>
+      <li><h3>Hear what's available</h3><p>Ask what's on the shelf today, along with the sizes and prices you need.</p></li>
+      <li><h3>Come and choose</h3><p>Bring the kids to Bypass Road, see it in person, and pick the one they love.</p></li>
+    </ol>
+  </section>
+
+  <section class="band section">
+    <div class="wrap">
+      <h2>What people say on Google</h2>
+      <p>Rated {store.reviews.rating} from {store.reviews.count} Google reviews, as of {store.reviews.asOf}.</p>
+      <div class="reviews">
+        {store.reviews.quotes.slice(0, 2).map((q) => <blockquote>“{q}”</blockquote>)}
+        <blockquote>“{store.reviews.quotes[2].replace(/\.+$/, '.')}”</blockquote>
+      </div>
+    </div>
+  </section>
+
+  {posts.length > 0 && (
+    <section class="section wrap">
+      <h2>Notes for parents</h2>
+      <PostCards posts={posts} />
+      <p style="margin-top:1.5rem"><a href="/blog">All notes</a></p>
+    </section>
+  )}
+
+  <section class="wrap" style="padding-bottom:clamp(3.5rem,8vw,6.5rem)">
+    <div class="callout" style="margin-top:0">
+      <h2>Find us on Bypass Road</h2>
+      <p>{addressLine}. Coming from {store.areas.slice(1, -1).join(', ')} or {store.areas.at(-1)}? Maps will bring you to the door.</p>
+      <div class="btns">
+        <a class="btn" href={directionsHref}>Open in Maps</a>
+        <a class="btn btn-wa" href="/visit">Visiting details</a>
+      </div>
+    </div>
+  </section>
+</Base>

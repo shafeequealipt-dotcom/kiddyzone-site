@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostCards from '../../components/PostCards.astro';
+
+const posts = (await getCollection('blog', (p) => !p.data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<Base
+  title="Notes for Parents | Kids' Clothes & Toy Guides | Kiddy Zone Wandoor"
+  description="Practical notes for parents in Wandoor and Malappuram on choosing kids' clothes for Kerala weather, festive outfits, age-wise toys and birthday gifts."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Notes', path: '/blog' }]}
+>
+  <section class="wrap" style="padding-block:1.5rem 4rem">
+    <h1>Notes for parents</h1>
+    <p class="lede">Clothes for Kerala weather, festive outfits, toys by age and gift ideas, from a kids' shop in Wandoor.</p>
+    <PostCards posts={posts} />
+  </section>
+</Base>

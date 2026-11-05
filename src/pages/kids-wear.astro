@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Art from '../components/Art.astro';
+import Categories from '../components/Categories.astro';
+import catalog from '../data/catalog.json';
+import { whatsappHref } from '../lib/store';
+---
+<Base
+  title="Kids' Wear in Wandoor | Frocks, Party & Western Wear | Kiddy Zone"
+  description="Imported kids' clothing and accessories at Kiddy Zone, Wandoor. Frocks, party and festive wear, western wear and baby sets on C H Bypass Road, Malappuram."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: "Kids' wear", path: '/kids-wear' }]}
+>
+  <section class="wrap" style="padding-block:1.5rem 3rem">
+    <h1>The kids' wear rail</h1>
+    <p class="lede">Imported kids' clothing and accessories in Wandoor. Tap a hanger, or tell us the age and the occasion and we'll tell you what's available.</p>
+    <div class="rail">
+      <div class="rail-row">
+        {catalog.wear.map((c) => (
+          <a class="hanger" href={`#${c.id}`}>
+            <Art name={c.art} />
+            <span>{c.name.split(' & ')[0].replace("Kids' a", 'A')}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="wrap" style="padding-bottom:3rem">
+    <Categories categories={catalog.wear} />
+    <div class="callout">
+      <h2>Function coming up?</h2>
+      <p>Tell us the date, the child's age and what they like to wear. It helps to ask early.</p>
+      <a class="btn btn-wa" href={whatsappHref("Hi Kiddy Zone, I'm looking for an outfit for a function. My child's age is ")}>Message us on WhatsApp</a>
+    </div>
+  </section>
+</Base>

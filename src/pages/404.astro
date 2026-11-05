@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Art from '../components/Art.astro';
+---
+<Base title="Page not found | Kiddy Zone Wandoor" description="This page has wandered off the shelf. Head back to Kiddy Zone's kids' wear, toys and gifts in Wandoor.">
+  <section class="narrow section" style="padding-top:1.5rem">
+    <Art name="ball" class="lost" />
+    <h1>This one rolled under the shelf</h1>
+    <p class="lede">We can't find that page. Try one of these instead.</p>
+    <div class="btns">
+      <a class="btn" href="/">Home</a>
+      <a class="btn" href="/kids-wear">Kids' wear</a>
+      <a class="btn" href="/toys">Toys</a>
+    </div>
+  </section>
+</Base>
+<style>
+  .lost { width: 110px; margin-bottom: 1rem; }
+</style>

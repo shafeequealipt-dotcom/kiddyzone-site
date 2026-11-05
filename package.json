@@ -1,0 +1,20 @@
+{
+  "name": "kiddyzone-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/generate-sitemap.mjs",
+    "preview": "astro preview",
+    "icons": "node scripts/generate-icons.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource/baloo-chettan-2": "^5.3.0",
+    "astro": "^5.18.2"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}

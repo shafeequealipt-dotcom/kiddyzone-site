@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { store } from '../lib/store';
+---
+<Base
+  title="Privacy | Kiddy Zone Wandoor"
+  description="How the Kiddy Zone website handles your information: no accounts, no forms and no online payments. Contact details are only used when you get in touch."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Privacy', path: '/privacy' }]}
+>
+  <section class="narrow section prose" style="padding-top:1.5rem">
+    <h1>Privacy</h1>
+    <p>This website is a shop window. It has no accounts, forms, online payments or analytics, and it doesn't set its own cookies.</p>
+    <h2>When you contact us</h2>
+    <p>If you call, email or message us on WhatsApp, we use what you send only to reply to you. WhatsApp's own privacy policy applies to messages sent there.</p>
+    <h2>Google Maps</h2>
+    <p>The <a href="/visit">Visit page</a> shows a Google map. When it loads, Google may receive your device's details under Google's own privacy policy.</p>
+    <h2>Questions</h2>
+    <p>Email <a href={`mailto:${store.email}`}>{store.email}</a> or call {store.phone}.</p>
+  </section>
+</Base>

@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { store, whatsappHref } from '../lib/store';
+---
+<Base
+  title="About Kiddy Zone | The Complete Kids Shoppe, Wandoor"
+  description="Kiddy Zone is a kids' shop on C H Bypass Road in Wandoor, Malappuram, bringing imported clothing, accessories, toys and gifts together under one roof."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]}
+>
+  <section class="narrow section" style="padding-top:1.5rem">
+    <h1>One shop for the whole list</h1>
+    <p class="lede">Clothes in one place, toys in another, a gift somewhere else. Kiddy Zone exists so you can get all of it done in one stop in Wandoor.</p>
+    <div class="prose">
+      <p>We call ourselves the complete kids' shop because that's the idea: imported kids' clothing and accessories on one side, imported and educational toys and gifts on the other, all on C H Bypass Road.</p>
+      <h2>What we care about</h2>
+      <p>Children are quick to tell you what they like and slow to forgive what itches. So we pay attention to how things look and how comfortable they are, and we're happy to talk you through what's available.</p>
+      <h2>Say hello</h2>
+      <p>You'll find our new arrivals on <a href={store.instagram}>Instagram</a>. For anything else, <a href={whatsappHref()}>message us on WhatsApp</a> or <a href="/visit">come and see the shop</a>.</p>
+    </div>
+  </section>
+</Base>

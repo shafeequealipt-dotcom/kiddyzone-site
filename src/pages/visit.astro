@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import { store, addressLine, telHref, whatsappHref, directionsHref, mapEmbedSrc, faqSchema } from '../lib/store';
+
+const faqs = [
+  { question: 'Where is Kiddy Zone in Wandoor?', answer: `Kiddy Zone is on C H Bypass Road, Wandoor, Malappuram district, Kerala 679328.` },
+  { question: 'Can I check if something is available before I come?', answer: `Yes. Call or WhatsApp the shop on ${store.phone} with the child's age and what you're looking for.` },
+  { question: 'Where can I see prices?', answer: `Stock changes often, so ask on WhatsApp or call the shop for current prices and sizes.` },
+  { question: 'Is there parking at the shop?', answer: `Customers mention car parking facilities in their Google reviews. Call the shop if you'd like to check before you come.` },
+];
+---
+<Base
+  title="Visit Kiddy Zone | Kids' Shop on C H Bypass Road, Wandoor"
+  description="Find Kiddy Zone on C H Bypass Road, Wandoor, Kerala 679328. Directions from Nilambur, Edavanna, Manjeri and Malappuram, with phone and WhatsApp details."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Visit', path: '/visit' }]}
+  schema={[faqSchema(faqs)]}
+>
+  <section class="wrap" style="padding-block:1.5rem 3rem">
+    <h1>Come and see the shop</h1>
+    <div class="visit">
+      <div>
+        <dl class="facts">
+          <div><dt>Address</dt><dd>{addressLine}</dd></div>
+          <div><dt>Phone &amp; WhatsApp</dt><dd><a href={telHref}>{store.phone}</a></dd></div>
+          {store.hours
+            ? <div><dt>Hours</dt><dd>{store.hours}</dd></div>
+            : <div><dt>Hours</dt><dd>Please call before a long trip to check today's timings.</dd></div>}
+          <div><dt>Coming from</dt><dd>{store.areas.slice(1).join(', ')}: search “Kiddy Zone Wandoor” in Maps.</dd></div>
+        </dl>
+        <div class="btns">
+          <a class="btn" href={directionsHref}>Get directions</a>
+          <a class="btn btn-wa" href={whatsappHref()}>WhatsApp us</a>
+        </div>
+      </div>
+      <iframe class="map" src={mapEmbedSrc} title="Map showing Kiddy Zone in Wandoor" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+  <section class="narrow faq" style="padding-bottom:4rem">
+    <h2>Before you come</h2>
+    {faqs.map((f) => <details><summary>{f.question}</summary><p>{f.answer}</p></details>)}
+  </section>
+</Base>

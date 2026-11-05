@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { store, whatsappHref, faqSchema, faqsFromMarkdown } from '../../lib/store';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', (p) => !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, pubDate, updatedDate, author, tags } = post.data;
+const path = `/blog/${post.id}`;
+const fmt = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const faqs = faqsFromMarkdown(post.body ?? '');
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString().slice(0, 10),
+  dateModified: (updatedDate ?? pubDate).toISOString().slice(0, 10),
+  author: { '@type': 'Organization', name: author, url: `${store.url}/` },
+  publisher: { '@id': `${store.url}/#store` },
+  mainEntityOfPage: `${store.url}${path}`,
+  image: `${store.url}/og.png`,
+  keywords: tags.join(', '),
+};
+---
+<Base
+  title={`${title} | Kiddy Zone`}
+  description={description}
+  ogType="article"
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Notes', path: '/blog' }, { name: title, path }]}
+  schema={[article, ...(faqs.length ? [faqSchema(faqs)] : [])]}
+>
+  <article class="narrow" style="padding-block:1.5rem 4rem">
+    <p class="crumbs"><a href="/blog">Notes for parents</a></p>
+    <h1 style="font-size:clamp(2.1rem,6vw,3.4rem)">{title}</h1>
+    <p><time class="post-date" datetime={pubDate.toISOString().slice(0, 10)}>{fmt.format(pubDate)}</time></p>
+    <ul class="tags">{tags.map((t) => <li>{t}</li>)}</ul>
+    <div class="prose"><Content /></div>
+    <div class="callout">
+      <h2>Want to see what's in the shop?</h2>
+      <p>Tell us the child's age and what you need, and we'll let you know what's on the shelf in Wandoor.</p>
+      <a class="btn btn-wa" href={whatsappHref(`Hi Kiddy Zone, I read "${title}" on your site. `)}>Ask on WhatsApp</a>
+    </div>
+  </article>
+</Base>
