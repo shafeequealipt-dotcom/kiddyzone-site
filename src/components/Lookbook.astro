@@ -1,0 +1,24 @@
+---
+// Photos from the shop's own lookbook. Captions describe the picture, not a price or stock.
+import { whatsappHref } from '../lib/store';
+
+const looks = [
+  { id: 'pink', name: 'Blush pink eyelet', alt: 'A smiling baby in a blush pink eyelet romper with a petal collar and matching socks' },
+  { id: 'white-eyelet', name: 'White eyelet frock', alt: 'A baby in a white eyelet frock with flutter sleeves and a white bow' },
+  { id: 'lemon', name: 'Soft lemon cotton', alt: 'A baby in a soft lemon cotton frock with lace shoulder frills' },
+  { id: 'olive', name: 'Olive with an ivory bow', alt: 'A baby in an olive puff-sleeve romper with a large ivory bow' },
+  { id: 'white-lace', name: 'White lace and tulle', alt: 'A baby in a white lace and tulle romper with bow socks' },
+  { id: 'plaid', name: 'Plaid with a crochet collar', alt: 'A baby in a navy plaid frock with a cream crochet collar' },
+];
+---
+<ul class="scroller looks" aria-label="Lookbook">
+  {looks.map((l) => (
+    <li>
+      <a class="look" href={whatsappHref(`Hi Kiddy Zone, I saw the "${l.name}" look on your website. Do you have something like it? My child's age is `)}>
+        <img src={`/images/look-${l.id}-720.webp`} srcset={`/images/look-${l.id}-400.webp 400w, /images/look-${l.id}-720.webp 720w`} sizes="(min-width: 900px) 260px, 60vw" alt={l.alt} width="720" height="1280" loading="lazy" />
+        <span class="card-name">{l.name}</span>
+        <span class="card-note">Ask on WhatsApp</span>
+      </a>
+    </li>
+  ))}
+</ul>

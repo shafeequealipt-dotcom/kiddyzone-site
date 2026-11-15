@@ -34,6 +34,14 @@
       "items": []
     },
     {
+      "id": "footwear",
+      "name": "Kids' footwear",
+      "art": "shoe",
+      "colour": "violet",
+      "blurb": "Shoes and sandals for small, fast feet. Bring the child along if you can, so we can check the fit in the shop.",
+      "items": []
+    },
+    {
       "id": "accessories",
       "name": "Kids' accessories",
       "art": "bow",
@@ -43,6 +51,14 @@
     }
   ],
   "toys": [
+    {
+      "id": "ride-ons",
+      "name": "Ride-ons & tricycles",
+      "art": "car",
+      "colour": "tomato",
+      "blurb": "Little rides, big adventures: ride-on cars, tricycles and scooters fill our front window. Tell us the child's age and we'll point you to the right size.",
+      "items": []
+    },
     {
       "id": "educational-toys",
       "name": "Educational toys",

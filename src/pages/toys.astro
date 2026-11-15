@@ -6,23 +6,19 @@ import catalog from '../data/catalog.json';
 import { whatsappHref } from '../lib/store';
 ---
 <Base
-  title="Toy Shop in Wandoor | Educational Toys & Gifts | Kiddy Zone"
-  description="Educational toys, soft toys, imported toys and gifts at Kiddy Zone on C H Bypass Road, Wandoor, Malappuram. Tell us the age and we'll suggest what to look at."
+  title="Toy Shop in Wandoor | Toys, Ride-ons & Gifts | Kiddy Zone"
+  description="Ride-on cars, tricycles, educational toys, soft toys and gifts at Kiddy Zone on C H Bypass Road, Wandoor, Malappuram. Tell us the age and we'll suggest what to look at."
   breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Toys', path: '/toys' }]}
 >
   <section class="wrap" style="padding-block:1.5rem 3rem">
-    <h1>The toy shelf</h1>
+    <p class="script">Little rides, big adventures</p>
+    <h1>Toys, rides &amp; gifts</h1>
     <p class="lede">Toys and gifts in Wandoor, for the child who has everything and the one who just wants the red one.</p>
-    <div class="shelf toy-shelf" style="margin-top:2rem">
-      <div class="shelf-grid">
-        {catalog.toys.map((c) => (
-          <a class={`cubby bg-${c.colour}`} href={`#${c.id}`}>
-            <Art name={c.art} />
-            <span>{c.name}</span>
-          </a>
-        ))}
-      </div>
-    </div>
+    <ul class="tiles five">
+      {catalog.toys.map((c) => (
+        <li><a class="tile" href={`#${c.id}`}><span class={`tile-frame bg-${c.colour}`}><Art name={c.art} /></span><span class="tile-name">{c.name}</span></a></li>
+      ))}
+    </ul>
   </section>
   <section class="wrap" style="padding-bottom:3rem">
     <Categories categories={catalog.toys} />

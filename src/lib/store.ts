@@ -24,8 +24,8 @@ export function storeSchema() {
     alternateName: store.name,
     description: store.description,
     url: `${store.url}/`,
-    image: `${store.url}/og.png`,
-    logo: `${store.url}/icon-512.png`,
+    image: [`${store.url}/images/shop-front-day-1340.webp`, `${store.url}/images/shop-night-1600.webp`, `${store.url}/og.png`],
+    logo: `${store.url}/images/logo.png`,
     telephone: store.phoneE164,
     email: store.email,
     address: {

@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Art from '../components/Art.astro';
+import Lookbook from '../components/Lookbook.astro';
 import PostCards from '../components/PostCards.astro';
 import { store, addressLine, whatsappHref, directionsHref } from '../lib/store';
 
@@ -9,60 +10,97 @@ const posts = (await getCollection('blog', (p) => !p.data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 2);
 
-const cubbies = [
-  { art: 'frock', label: 'Frocks', href: '/kids-wear#frocks', bg: 'pink' },
-  { art: 'blocks', label: 'Learning toys', href: '/toys#educational-toys', bg: 'teal' },
-  { art: 'party', label: 'Party wear', href: '/kids-wear#party-wear', bg: 'violet' },
-  { art: 'teddy', label: 'Soft toys', href: '/toys#soft-toys', bg: 'sun' },
-  { art: 'dungaree', label: 'Western wear', href: '/kids-wear#western-wear', bg: 'paper' },
-  { art: 'rocket', label: 'Imported toys', href: '/toys#imported-toys', bg: 'tomato' },
-  { art: 'gift', label: 'Gifts', href: '/toys#gifts', bg: 'teal' },
-  { art: 'onesie', label: 'Baby sets', href: '/kids-wear#baby-sets', bg: 'pink' },
-  { art: 'bow', label: 'Accessories', href: '/kids-wear#accessories', bg: 'sun' },
+// The category line from the shop's own billboard.
+const ribbon = ['Kids fashion clothes', 'Kids footwear', 'Toys', 'Kids fancy', 'Gifts', 'Accessories'];
+
+const features = [
+  { art: 'frock', bg: 'pink', title: "Kids' fashion", text: 'Everyday and festive styles', href: '/kids-wear' },
+  { art: 'car', bg: 'sun', title: 'Toys & rides', text: 'Little rides, big adventures', href: '/toys' },
+  { art: 'onesie', bg: 'teal', title: 'Baby sets', text: 'Soft things for the smallest', href: '/kids-wear#baby-sets' },
+  { art: 'gift', bg: 'violet', title: 'Gifts', text: 'For the birthday tomorrow', href: '/toys#gifts' },
+];
+
+const reels = [
+  { n: 1, label: "Toddlers' clothing" },
+  { n: 3, label: 'Little rides, big adventures' },
+  { n: 5, label: 'Baby wear' },
+  { n: 4, label: 'Little wheels, big adventures' },
+  { n: 2, label: "Toddlers' clothing" },
 ];
 ---
 <Base
   title="Kiddy Zone Wandoor | Kids' Wear, Toys & Gifts Shop in Malappuram"
   description="Kids' wear, accessories, toys and gifts under one roof on C H Bypass Road, Wandoor. Call or WhatsApp Kiddy Zone to ask what's available, then come and see it."
 >
-  <section class="hero wrap">
-    <div>
-      <p class="hero-ml" lang="ml">{store.taglineMl}</p>
-      <h1>The next outfit. The next favourite toy. One shop in Wandoor.</h1>
-      <p class="lede">Kiddy Zone is the complete kids' shop on C H Bypass Road, with imported clothing, accessories, toys and gifts all under one roof.</p>
-      <div class="btns">
-        <a class="btn btn-wa" href={whatsappHref("Hi Kiddy Zone, what's new in the shop this week?")}>Check availability on WhatsApp</a>
-        <a class="btn" href={directionsHref}>Get directions</a>
+  <section class="hero">
+    <svg class="hero-sky" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g fill="#fff" opacity=".85"><path d="M40 420a22 22 0 0 1 42-8 17 17 0 0 1 24 16 14 14 0 0 1-2 28H40a18 18 0 0 1 0-36z"/><path d="M1010 396a18 18 0 0 1 34-6 14 14 0 0 1 20 13 11 11 0 0 1-2 22h-52a15 15 0 0 1 0-29z"/><path d="M560 44a14 14 0 0 1 27-5 11 11 0 0 1 16 10 9 9 0 0 1-2 18h-41a12 12 0 0 1 0-23z"/></g>
+      <g fill="#ecc7a8" opacity=".75"><path d="m90 300 4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/><path d="m520 430 3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/><path d="m1120 120 4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/><path d="m640 170 2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/><path d="m330 40 2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></g>
+    </svg>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="script">Let them fly high</p>
+        <h1>Everything for your <span class="accent">little ones</span></h1>
+        <p class="lede">Kiddy Zone is the complete kids' shop on Bypass Road, Wandoor, with kids' fashion, footwear, toys, ride-ons, gifts and accessories under one roof.</p>
+        <div class="btns">
+          <a class="btn btn-wa" href={whatsappHref("Hi Kiddy Zone, what's new in the shop this week?")}>Check availability on WhatsApp</a>
+          <a class="btn btn-ghost" href={directionsHref}>Get directions</a>
+        </div>
+        <p class="hero-ml" lang="ml">{store.taglineMl}</p>
       </div>
-    </div>
-    <div class="shelf">
-      <div class="shelf-grid">
-        {cubbies.map((c) => (
-          <a class={`cubby bg-${c.bg}`} href={c.href}>
-            <Art name={c.art} />
-            <span>{c.label}</span>
-          </a>
-        ))}
+      <div class="hero-photos">
+        <img class="polaroid p1" src="/images/look-pink-720.webp" srcset="/images/look-pink-400.webp 400w, /images/look-pink-720.webp 720w" sizes="(min-width: 900px) 300px, 46vw" alt="A smiling baby in a blush pink eyelet romper with a petal collar" width="720" height="1280" fetchpriority="high" />
+        <img class="polaroid p2" src="/images/look-white-eyelet-720.webp" srcset="/images/look-white-eyelet-400.webp 400w, /images/look-white-eyelet-720.webp 720w" sizes="(min-width: 900px) 240px, 38vw" alt="A baby in a white eyelet frock with a matching bow" width="720" height="1280" />
+        <a class="hero-badge" href="#reviews"><strong>{store.reviews.rating}</strong><span aria-hidden="true">★★★★★</span><small>on Google</small></a>
       </div>
     </div>
   </section>
 
-  <section class="wrap doors" aria-label="Shop by department">
-    <a class="door door-wear" href="/kids-wear">
-      <h2>Kids' wear</h2>
-      <p>Everyday dresses, festive outfits, western wear, baby sets and the little extras that finish them.</p>
-      <span class="door-go">See the rail</span>
-      <Art name="frock" />
-    </a>
-    <a class="door door-toys" href="/toys">
-      <h2>Toys &amp; gifts</h2>
-      <p>Educational toys, soft toys, imported finds, and an easy answer when there's a birthday tomorrow.</p>
-      <span class="door-go">See the shelf</span>
-      <Art name="car" />
-    </a>
+  <div class="ribbon" aria-hidden="true">
+    <div class="ribbon-track">
+      {[0, 1].map(() => ribbon.map((t) => <span>{t}</span>))}
+    </div>
+  </div>
+
+  <section class="wrap features" aria-label="Shop by department">
+    {features.map((f) => (
+      <a class={`feature bg-${f.bg}`} href={f.href}>
+        <Art name={f.art} />
+        <span class="feature-title">{f.title}</span>
+        <span class="feature-text">{f.text}</span>
+      </a>
+    ))}
   </section>
 
-  <section class="section wrap">
+  <section class="section">
+    <div class="wrap center">
+      <p class="script">Little looks</p>
+      <h2>Dressed for every little moment</h2>
+      <p class="lede">From soft everyday cottons to festive frocks. Styles move quickly, so message us to check what's in the shop today.</p>
+    </div>
+    <Lookbook />
+  </section>
+
+  <section class="section reels-band">
+    <div class="wrap center">
+      <p class="script">Little rides, big adventures</p>
+      <h2>Fresh from our reels</h2>
+      <p class="lede">New arrivals show up on <a href={store.instagram}>Instagram {store.instagramHandle}</a> first.</p>
+    </div>
+    <ul class="scroller reels" aria-label="Kiddy Zone reels">
+      {reels.map((r) => (
+        <li>
+          <video class="reel" muted loop playsinline preload="none" poster={`/media/reel-${r.n}.webp`} width="368" height="640" aria-label={`Reel: ${r.label}`}>
+            <source src={`/media/reel-${r.n}.mp4`} type="video/mp4" />
+          </video>
+          <span class="card-name">{r.label}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section wrap center">
+    <p class="script">How it works</p>
     <h2>Check first, then come and see it</h2>
     <p class="lede">Stock in a kids' shop changes quickly, so we don't list prices or sizes that may be gone tomorrow. Just ask.</p>
     <ol class="steps">
@@ -72,8 +110,27 @@ const cubbies = [
     </ol>
   </section>
 
-  <section class="band section">
-    <div class="wrap">
+  <section class="section wrap" id="shop">
+    <div class="center">
+      <p class="script">Find us on Bypass Road</p>
+      <h2>Come and see the shop</h2>
+      <p class="lede">{addressLine}. Coming from {store.areas.slice(1, -1).join(', ')} or {store.areas.at(-1)}? Maps will bring you to the door.</p>
+    </div>
+    <div class="mosaic">
+      <img class="m-wide" src="/images/shop-front-day-1340.webp" srcset="/images/shop-front-day-800.webp 800w, /images/shop-front-day-1340.webp 1340w" sizes="(min-width: 900px) 760px, 100vw" alt="The Kiddy Zone shopfront on Bypass Road, Wandoor, with ride-on cars in the left window and kids' wear in the right" width="1340" height="840" loading="lazy" />
+      <img src="/images/shop-window-day-900.webp" srcset="/images/shop-window-day-480.webp 480w, /images/shop-window-day-900.webp 900w" sizes="(min-width: 900px) 380px, 50vw" alt="The kids' wear window with soft toys and the complete kids shoppe sign" width="900" height="1013" loading="lazy" />
+      <img src="/images/shop-window-night-900.webp" srcset="/images/shop-window-night-480.webp 480w, /images/shop-window-night-900.webp 900w" sizes="(min-width: 900px) 380px, 50vw" alt="The shop window lit up at night with baby wear, soft toys and ride-ons" width="900" height="1012" loading="lazy" />
+      <img class="m-wide" src="/images/shop-night-1600.webp" srcset="/images/shop-night-800.webp 800w, /images/shop-night-1600.webp 1600w" sizes="(min-width: 900px) 760px, 100vw" alt="Kiddy Zone lit up at night, seen from across the road" width="1600" height="570" loading="lazy" />
+    </div>
+    <div class="btns" style="justify-content:center;margin-top:2rem">
+      <a class="btn" href={directionsHref}>Open in Maps</a>
+      <a class="btn btn-ghost" href="/visit">Visiting details</a>
+    </div>
+  </section>
+
+  <section class="band section" id="reviews">
+    <div class="wrap center">
+      <p class="script">Kind words</p>
       <h2>What people say on Google</h2>
       <p>Rated {store.reviews.rating} from {store.reviews.count} Google reviews, as of {store.reviews.asOf}.</p>
       <div class="reviews">
@@ -84,21 +141,28 @@ const cubbies = [
   </section>
 
   {posts.length > 0 && (
-    <section class="section wrap">
+    <section class="section wrap center">
+      <p class="script">From the blog</p>
       <h2>Notes for parents</h2>
-      <PostCards posts={posts} />
-      <p style="margin-top:1.5rem"><a href="/blog">All notes</a></p>
+      <div style="text-align:left"><PostCards posts={posts} /></div>
+      <p style="margin-top:1.75rem"><a class="btn btn-ghost" href="/blog">All notes</a></p>
     </section>
   )}
-
-  <section class="wrap" style="padding-bottom:clamp(3.5rem,8vw,6.5rem)">
-    <div class="callout" style="margin-top:0">
-      <h2>Find us on Bypass Road</h2>
-      <p>{addressLine}. Coming from {store.areas.slice(1, -1).join(', ')} or {store.areas.at(-1)}? Maps will bring you to the door.</p>
-      <div class="btns">
-        <a class="btn" href={directionsHref}>Open in Maps</a>
-        <a class="btn btn-wa" href="/visit">Visiting details</a>
-      </div>
-    </div>
-  </section>
 </Base>
+
+<script>
+  // Reels play only while on screen; with reduced motion they wait for a tap.
+  const reels = document.querySelectorAll<HTMLVideoElement>('video.reel');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    reels.forEach((v) => (v.controls = true));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        const v = e.target as HTMLVideoElement;
+        if (e.isIntersecting) v.play().catch(() => (v.controls = true));
+        else v.pause();
+      }
+    }, { threshold: 0.5 });
+    reels.forEach((v) => io.observe(v));
+  }
+</script>
