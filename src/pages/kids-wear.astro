@@ -8,13 +8,13 @@ import { whatsappHref } from '../lib/store';
 ---
 <Base
   title="Kids' Wear in Wandoor | Frocks, Party & Western Wear | Kiddy Zone"
-  description="Imported kids' clothing and accessories at Kiddy Zone, Wandoor. Frocks, party wear, western wear, footwear and baby sets on C H Bypass Road, Malappuram."
+  description="Imported kids' clothing and accessories at Kiddy Zone, Wandoor. Frocks, party wear, western wear and baby sets on C H Bypass Road, Malappuram."
   breadcrumbs={[{ name: 'Home', path: '/' }, { name: "Kids' wear", path: '/kids-wear' }]}
 >
   <section class="wrap" style="padding-block:1.5rem 3rem">
     <h1>Kids' wear</h1>
     <p class="lede">Imported kids' clothing and accessories in Wandoor. Tap a category, or tell us the age and the occasion and we'll tell you what's available.</p>
-    <ul class="tiles six">
+    <ul class="tiles five">
       {catalog.wear.map((c) => (
         <li><a class="tile" href={`#${c.id}`}><span class={`tile-frame bg-${c.colour}`}><Art name={c.art} /></span><span class="tile-name">{c.name.split(' & ')[0].replace("Kids' a", 'A')}</span></a></li>
       ))}

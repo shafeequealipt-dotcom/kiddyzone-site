@@ -10,14 +10,14 @@ const posts = (await getCollection('blog', (p) => !p.data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 2);
 
-// The category line from the shop's own billboard.
-const ribbon = ['Kids fashion clothes', 'Kids footwear', 'Toys', 'Kids fancy', 'Gifts', 'Accessories'];
+// The category line from the shop's own billboard (footwear left out: the shop doesn't stock it).
+const ribbon = ['Kids fashion clothes', 'Toys', 'Kids fancy', 'Gifts', 'Accessories'];
 
 const features = [
   { art: 'frock', bg: 'pink', title: "Kids' fashion", text: 'Everyday and festive styles', href: '/kids-wear' },
   { art: 'car', bg: 'sun', title: 'Toys & rides', text: 'Little rides, big adventures', href: '/toys' },
   { art: 'onesie', bg: 'teal', title: 'Baby sets', text: 'Soft things for the smallest', href: '/kids-wear#baby-sets' },
-  { art: 'gift', bg: 'violet', title: 'Gifts', text: 'For the birthday tomorrow', href: '/toys#gifts' },
+  { art: 'bow', bg: 'violet', title: 'Accessories', text: 'The little finishing touches', href: '/kids-wear#accessories' },
 ];
 
 const reels = [
@@ -41,7 +41,7 @@ const reels = [
       <div class="hero-copy">
         <p class="script">Let them fly high</p>
         <h1>Everything for your <span class="accent">little ones</span></h1>
-        <p class="lede">Kiddy Zone is the complete kids' shop on Bypass Road, Wandoor, with kids' fashion, footwear, toys, ride-ons, gifts and accessories under one roof.</p>
+        <p class="lede">Kiddy Zone is the complete kids' shop on Bypass Road, Wandoor, with kids' fashion, toys, ride-ons, gifts and accessories under one roof.</p>
         <div class="btns">
           <a class="btn btn-wa" href={whatsappHref("Hi Kiddy Zone, what's new in the shop this week?")}>Check availability on WhatsApp</a>
           <a class="btn btn-ghost" href={directionsHref}>Get directions</a>
